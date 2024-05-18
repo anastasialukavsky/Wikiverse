@@ -42,7 +42,7 @@ router.post('/', async (req, res, next) => {
       await page.addTags(tags)
     }
 
-    res.send(page)
+    res.status(200).json(page)
   } catch (error) {
     next(error)
   }
