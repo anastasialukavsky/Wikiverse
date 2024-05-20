@@ -29,7 +29,8 @@ router.post('/', async (req, res, next) => {
     await page.setAuthor(user)
 
     if (req.body.tags) {
-      const tagArray = req.body.tags.split(' ')
+      // const tagArray = req.body.tags.split(' ')
+      const tagArray = typeof req.body.tags === 'string' ? req.body.tags.split(" ") : []
       const tags = []
       for (const tagName of tagArray) {
         const [tag, wasCreated] = await Tag.findOrCreate({
@@ -107,7 +108,7 @@ router.delete('/:slug', async (req, res, next) => {
     })
 
     const pages = await Page.findAll()
-    res.send(pages)
+    res.status(200).json(pages)
   } catch (error) {
     next(error)
   }
