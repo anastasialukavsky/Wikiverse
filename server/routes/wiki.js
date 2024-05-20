@@ -29,7 +29,6 @@ router.post('/', async (req, res, next) => {
     await page.setAuthor(user)
 
     if (req.body.tags) {
-      // const tagArray = req.body.tags.split(' ')
       const tagArray = typeof req.body.tags === 'string' ? req.body.tags.split(" ") : []
       const tags = []
       for (const tagName of tagArray) {
