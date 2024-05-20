@@ -51,6 +51,7 @@ export default function ArticleForm({onSubmit}) {
 
   return (
     <section>
+    <h1 className="add-article-header">Add An Article</h1>
       <form onSubmit={handleSubmit} className='form'>
         <label>
           Title:
@@ -91,7 +92,7 @@ export default function ArticleForm({onSubmit}) {
             onChange={(e) => setTags(e.target.value)}
           />
         </label>
-        <button type='submit'>Submit</button>
+        <button className="article-form-btn" type='submit'>Submit</button>
       </form>
     </section>
   );
