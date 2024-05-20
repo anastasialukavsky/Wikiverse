@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import apiURL from '../api';
 
-export const Page = ({ slug, fetchPages }) => {
+export const Page = ({ slug, fetchPages, setIsAddingArticle }) => {
   const [article, setArticle] = useState(null);
-
 
   useEffect(() => {
     const fetchArticle = async () => {
       try {
+        setIsAddingArticle(false)
         const response = await fetch(`${apiURL}/wiki/${slug}`);
         if (!response.ok) {
           throw new Error('Failed to fetch article');
         }
         const data = await response.json();
-        // console.log({ data });
         setArticle(data);
       } catch (error) {
         console.error(error);
@@ -27,22 +26,20 @@ export const Page = ({ slug, fetchPages }) => {
     };
   }, [slug]);
 
-
-
-    const handleDelete = async () => {
-      try {
-        const response = await fetch(`${apiURL}/wiki/${slug}`, {
-          method: 'DELETE',
-        });
-        if (!response.ok) {
-          throw new Error('Failed to delete article');
-        }
-       
-        fetchPages();
-      } catch (error) {
-        console.error('Error deleting article:', error.message);
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`${apiURL}/wiki/${slug}`, {
+        method: 'DELETE',
+      });
+      if (!response.ok) {
+        throw new Error('Failed to delete article');
       }
-    };
+
+      await fetchPages();
+    } catch (error) {
+      console.error('Error deleting article:', error.message);
+    }
+  };
 
   if (!article) {
     return <div>Loading...</div>;
