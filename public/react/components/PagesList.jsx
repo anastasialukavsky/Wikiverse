@@ -14,8 +14,8 @@ export const PagesList = ({ pages, fetchPages, setIsAddingArticle }) => {
 
   if (selectedPage) {
     return (
-      <div>
-        <button onClick={handleBackToList}>Back to Wiki List</button>
+      <div className="page-list">
+        <button className="back-to-articles-btn" onClick={handleBackToList}>Back to Wiki List</button>
         <Page
           slug={selectedPage}
           fetchPages={fetchPages}
