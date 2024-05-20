@@ -3,7 +3,7 @@ import apiURL from '../api';
 
 
 
-export default function ArticleForm({pages, setPages, fetchPages}) {
+export default function ArticleForm({onSubmit}) {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [authorName, setAuthorName] = useState('');
@@ -18,7 +18,7 @@ export default function ArticleForm({pages, setPages, fetchPages}) {
         content,
         name: authorName,
         email: authorEmail,
-        tags: tags.split(' '),
+        tags: tags? tags.split(' ') : [],
       };
 
       try {
@@ -29,9 +29,8 @@ export default function ArticleForm({pages, setPages, fetchPages}) {
           },
           body: JSON.stringify(articleData),
         });
-        console.log({response})
 
-        // await response.json()
+        await response.json()
         if (!response.ok) {
           throw new Error('Failed to add article');
         }
@@ -42,11 +41,14 @@ export default function ArticleForm({pages, setPages, fetchPages}) {
         setAuthorEmail('');
         setTags('');
 
-        fetchPages()
+        onSubmit()
       } catch (error) {
         console.error('Error adding article:', error.message);
       }
     };
+
+
+
   return (
     <section>
       <form onSubmit={handleSubmit} className='form'>
@@ -85,7 +87,7 @@ export default function ArticleForm({pages, setPages, fetchPages}) {
           Tags:
           <input
             type='text'
-            value={tags}
+            value={tags || ''}
             onChange={(e) => setTags(e.target.value)}
           />
         </label>
