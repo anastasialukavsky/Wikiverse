@@ -48,13 +48,21 @@ export const App = () => {
     switch (currentPage) {
       case 'authors':
         return <AuthorsList setIsMainVisible={setIsMainVisible}/>;
+      case 'home':
+        return (
+          <PagesList
+            pages={pages}
+            fetchPages={fetchPages}
+            setIsAddingArticle={setIsAddingArticle}
+          />
+        );
       default:
         return <h1>Welcome to WikiVerse!</h1>;
     }
   };
 
   return (
-    <main>
+    <main className="main-wrapper">
       <div>
         <Navbar handleNavigation={handleNavigation}/>
         {renderPage()}
@@ -63,7 +71,7 @@ export const App = () => {
       {isAddingArticle  ? (
         <ArticleForm onSubmit={handleFormSubmit} />
       ) : (
-        <>
+        <div className='pages'>
         {isMainVisible &&
           <PagesList
           pages={pages}
@@ -72,8 +80,8 @@ export const App = () => {
           />
         }
           <br />
-          <button onClick={handleClick}>Add an Article</button>
-          </>
+          <button className='add-article-btn' onClick={handleClick}>Add an Article</button>
+          </div>
           )}
     </main>
   );
