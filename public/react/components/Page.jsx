@@ -58,7 +58,7 @@ export const Page = ({ slug, fetchPages, setIsAddingArticle }) => {
       <p>
         <b>Published: </b> {new Date(article.createdAt).toLocaleDateString()}
       </p>
-      <button onClick={handleDelete}>Delete</button>
+      <button className='delete-btn' onClick={handleDelete}>Delete</button>
     </>
   );
 };
