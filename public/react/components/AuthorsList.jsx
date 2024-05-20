@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import apiURL from '../api';
 
-export default function AuthorsList({setIsMainVisible}) {
+export default function AuthorsList({ setIsMainVisible }) {
   const [authors, setAuthors] = useState([]);
   const fetchAuthors = async () => {
     try {
@@ -17,20 +17,18 @@ export default function AuthorsList({setIsMainVisible}) {
   };
 
   useEffect(() => {
-    setIsMainVisible(false)
+    setIsMainVisible(false);
     fetchAuthors();
   }, []);
 
   return (
     <div>
-      <div>
-        <h1>List of Authors</h1>
-        <ul>
-          {authors.map((author) => (
-            <li key={author.id}>{author.name}</li>
-          ))}
-        </ul>
-      </div>
+      <h1>List of Authors</h1>
+      <ul className='authors-list'>
+        {authors.map((author) => (
+          <li key={author.id}>{author.name}</li>
+        ))}
+      </ul>
     </div>
   );
 }
