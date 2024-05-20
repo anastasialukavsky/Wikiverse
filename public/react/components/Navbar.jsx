@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import apiURL from '../api';
-// import { Link } from 'react-router-dom';
+import React from 'react';
 
 export default function Navbar({handleNavigation}) {
     return (
-      <nav>
-        <ul>
+      <nav className="navbar">
+        <ul className='link-list'>
           <li>
-            <button onClick={() => handleNavigation('authors')}>Authors</button>
+            <button className="link-btn" onClick={() => handleNavigation('authors')}>Authors</button>
+          </li>
+          <li>
+            <button className='link-btn' onClick={() => handleNavigation('home')}>Home</button>
           </li>
         </ul>
       </nav>
