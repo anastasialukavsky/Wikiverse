@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Page } from './Page';
 
-export const PagesList = ({ pages, fetchPages }) => {
+export const PagesList = ({ pages, fetchPages, setIsAddingArticle }) => {
   const [selectedPage, setSelectedPage] = useState(null);
 
   const handleClick = (slug) => {
@@ -16,12 +16,16 @@ export const PagesList = ({ pages, fetchPages }) => {
     return (
       <div>
         <button onClick={handleBackToList}>Back to Wiki List</button>
-        <Page slug={selectedPage} fetchPages={fetchPages}/>
+        <Page
+          slug={selectedPage}
+          fetchPages={fetchPages}
+          setIsAddingArticle={setIsAddingArticle}
+        />
       </div>
     );
   }
 
-  console.log({ pages });
+  // console.log({ pages });
 
   return (
     <>
